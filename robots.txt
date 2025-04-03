@@ -1,3 +1,18 @@
+# Allow all web crawlers
 User-agent: *
 Allow: /
-Sitemap: https://ketaring.bg/sitemap.xml 
+
+# Disallow all crawlers from temp directories
+User-agent: *
+Disallow: /temp/
+Disallow: /private/
+
+# Sitemap location
+Sitemap: https://ketaring.bg/sitemap.xml
+
+# Crawl delay for bots
+User-agent: Googlebot
+Crawl-delay: 1
+
+User-agent: bingbot
+Crawl-delay: 1 

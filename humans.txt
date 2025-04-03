@@ -1,0 +1,25 @@
+/* WEBSITE */
+  Name: Ketaring.bg
+  Description: Кетъринг услуги в България
+  Language: Bulgarian
+  Launch date: 2023
+  Last update: 2023-04-03
+  Standards: HTML5, CSS3, JavaScript
+  Components: Font Awesome, Poppins Font
+  Software: Visual Studio Code
+
+/* TEAM */
+  Developer: Ketaring.bg Team
+  Contact: info@ketaring.bg
+  Location: Bulgaria
+
+/* THANKS */
+  Font Awesome: https://fontawesome.com
+  Unsplash: https://unsplash.com
+  Google Fonts: https://fonts.google.com
+
+/* SITE */
+  Website: https://ketaring.bg
+  Language: Bulgarian
+  Doctype: HTML5
+  IDE: Visual Studio Code 

@@ -1,0 +1,7 @@
+# security.txt file for ketaring.bg
+Contact: mailto:security@ketaring.bg
+Expires: 2024-04-03T00:00:00.000Z
+Preferred-Languages: en, bg
+Canonical: https://ketaring.bg/.well-known/security.txt
+Policy: https://ketaring.bg/security-policy
+Hiring: https://ketaring.bg/careers 

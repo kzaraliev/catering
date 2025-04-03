@@ -1,83 +1,103 @@
-# Ketaring.bg Landing Page
+# Ketaring.bg Лендинг Страница
 
-A simple, responsive landing page for the ketaring.bg domain. This landing page serves as a placeholder while the full web application is in development.
+Проста, адаптивна лендинг страница за домейна ketaring.bg. Тази лендинг страница служи като временна визитка, докато пълното уеб приложение е в процес на разработка.
 
-## Features
+## Характеристики
 
-- Responsive design that works on all devices
-- Modern, clean UI with professional aesthetics
-- Contact form for restaurant partnerships
-- SEO optimized
+- Адаптивен дизайн, който работи на всички устройства
+- Модерен, чист UI с професионална естетика
+- Контактна форма за партньорства с ресторанти
+- SEO оптимизирана
+- Налична на български език
+- Структурирани данни за по-добра индексация
 
-## Files
+## Файлове
 
-- `index.html` - Main HTML structure
-- `styles.css` - Complete styling for the landing page
-- `script.js` - Form validation and minor UI effects
+- `index.html` - Основна HTML структура
+- `styles.css` - Пълно стилизиране на лендинг страницата
+- `script.js` - Валидация на форми и малки UI ефекти
+- `sitemap.xml` - XML карта на сайта за търсачки
+- `robots.txt` - Инструкции за уеб роботи
+- `humans.txt` - Информация за екипа и технологиите
+- `.well-known/security.txt` - Информация за сигурност
 
-## Deployment Instructions
+## SEO Оптимизации
 
-### Option 1: GitHub Pages
+Страницата е оптимизирана за SEO с:
 
-1. Push this repository to GitHub
-2. Enable GitHub Pages in the repository settings
-3. Point your domain (ketaring.bg) to GitHub Pages by updating your DNS settings:
-   - Add an A record pointing to GitHub Pages IP addresses
-   - Add a CNAME record with www pointing to your username.github.io
-4. Add a CNAME file to the repository with your domain name
+- Мета тагове на български език
+- Структурирани данни с JSON-LD
+- OG и Twitter мета тагове за социални медии
+- Адаптивен дизайн (mobile-friendly)
+- Правилна семантична HTML5 структура
+- Бърза скорост на зареждане
+- XML карта на сайта и robots.txt файл
+- Канонични линкове и алтернативни езикови връзки
 
-### Option 2: Netlify
+## Инструкции за разгръщане
 
-1. Sign up for a [Netlify](https://www.netlify.com/) account
-2. Create a new site from Git and select your repository
-3. Configure your build settings (not required for this simple site)
-4. Add your custom domain (ketaring.bg) in the site settings
-5. Update your DNS settings according to Netlify's instructions
+### Опция 1: GitHub Pages
 
-### Option 3: Traditional Hosting
+1. Качете това хранилище в GitHub
+2. Активирайте GitHub Pages в настройките на хранилището
+3. Насочете вашия домейн (ketaring.bg) към GitHub Pages, като актуализирате DNS настройките си:
+   - Добавете A запис, сочещ към IP адресите на GitHub Pages
+   - Добавете CNAME запис с www, сочещ към вашия username.github.io
+4. Добавете CNAME файл към хранилището с вашето име на домейн
 
-1. Upload all files to your web hosting provider via FTP
-2. Ensure your domain (ketaring.bg) is configured correctly in your hosting panel
+### Опция 2: Netlify
 
-## Customization
+1. Регистрирайте се за [Netlify](https://www.netlify.com/) акаунт
+2. Създайте нов сайт от Git и изберете вашето хранилище
+3. Конфигурирайте настройките си за изграждане (не се изисква за този прост сайт)
+4. Добавете вашия собствен домейн (ketaring.bg) в настройките на сайта
+5. Актуализирайте DNS настройките си според инструкциите на Netlify
 
-### Changing Images
+### Опция 3: Традиционен хостинг
 
-- To change the hero background, modify the URL in `styles.css` under the `#hero` selector
-- For additional images, add them to an `images` folder and reference them in the CSS
+1. Качете всички файлове във вашия уеб хостинг доставчик чрез FTP
+2. Уверете се, че вашият домейн (ketaring.bg) е правилно конфигуриран в панела на хостинга ви
 
-### Modifying Colors
+## Персонализация
 
-- Edit the color variables at the top of `styles.css` to change the color scheme:
+### Промяна на изображения
+
+- За да промените фона на hero секцията, модифицирайте URL адреса в `styles.css` под селектора `#hero`
+- За допълнителни изображения, добавете ги в папка `images` и ги препратете в CSS
+
+### Промяна на цветовете
+
+- Редактирайте цветовите променливи в началото на `styles.css`, за да промените цветовата схема:
   ```css
   :root {
       --primary-color: #e67e22;
       --secondary-color: #2c3e50;
-      /* other color variables */
+      /* други цветови променливи */
   }
   ```
 
-### Form Handling
+### Обработка на формуляри
 
-The current implementation shows a success message but doesn't send data anywhere. To enable form submission:
+Текущата имплементация показва съобщение за успех, но не изпраща данни никъде. За да активирате изпращането на формуляри:
 
-1. Create a server endpoint to receive form data or use a form service like Formspree
-2. Uncomment and modify the `submitFormToServer` function in `script.js`
+1. Създайте сървърен endpoint за получаване на данни от формуляра или използвайте услуга за формуляри като Formspree
+2. Разкоментирайте и модифицирайте функцията `submitFormToServer` в `script.js`
 
-## Browser Compatibility
+## Съвместимост с браузъри
 
-This landing page is compatible with:
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
-- Mobile browsers
+Тази лендинг страница е съвместима с:
+- Chrome (последна версия)
+- Firefox (последна версия)
+- Safari (последна версия)
+- Edge (последна версия)
+- Мобилни браузъри
 
-## Future Development
+## Бъдещо развитие
 
-- Once the full web application is ready, this landing page can be replaced or integrated into the main application
-- Consider adding analytics (e.g., Google Analytics) to track visitor engagement
+- След като пълното уеб приложение е готово, тази лендинг страница може да бъде заменена или интегрирана в основното приложение
+- Помислете за добавяне на аналитика (напр. Google Analytics), за да проследявате ангажираността на посетителите
+- Добавете FAQ секция с структурирани данни
 
-## Contact
+## Контакт
 
-For any questions or issues, please contact info@ketaring.bg 
+За въпроси или проблеми, моля, свържете се с info@ketaring.bg 
