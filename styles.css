@@ -344,6 +344,78 @@ form .btn {
     margin-top: 10px;
 }
 
+.form-success {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 40px 20px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    animation: fadeIn 0.5s ease;
+}
+
+.success-icon {
+    font-size: 3rem;
+    color: #28a745;
+    margin-bottom: 20px;
+}
+
+.form-success h3 {
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+
+.form-success p {
+    margin-bottom: 25px;
+}
+
+.form-spinner {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.form-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    animation: fadeIn 0.3s ease;
+    border-left: 4px solid #dc3545;
+}
+
+.form-error-fade {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.spinner {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(230, 126, 34, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 /* Footer */
 footer {
     background-color: var(--secondary-color);

@@ -30,6 +30,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="https://img.icons8.com/color/48/000000/restaurant-menu.png">
+    <!-- EmailJS Library -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <!-- JSON-LD structured data for local business -->
     <script type="application/ld+json">
     {
@@ -126,6 +128,13 @@
                 <p>Интересувате се да станете ресторант-партньор? Попълнете формуляра по-долу и ще се свържем с вас с повече информация.</p>
                 
                 <div class="contact-wrapper">
+                    <div id="form-success" class="form-success" style="display: none;">
+                        <i class="fas fa-check-circle success-icon"></i>
+                        <h3>Благодарим за интереса!</h3>
+                        <p>Вашето съобщение беше успешно изпратено. Ще се свържем с вас възможно най-скоро.</p>
+                        <button type="button" class="btn" id="send-another">Изпратете друго съобщение</button>
+                    </div>
+                    
                     <form id="contact-form">
                         <div class="form-group">
                             <label for="name">Име</label>
@@ -148,6 +157,9 @@
                             <textarea id="message" name="message" rows="5" placeholder="Вашето съобщение" required></textarea>
                         </div>
                         <button type="submit" class="btn">Изпрати</button>
+                        <div class="form-spinner" id="form-spinner" style="display: none;">
+                            <div class="spinner"></div>
+                        </div>
                     </form>
                 </div>
             </div>

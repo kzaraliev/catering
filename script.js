@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize EmailJS
+    (function() {
+        // Initialize EmailJS with your public key
+        emailjs.init("winnx47WIGJzZR862"); // Replace with your actual public key from EmailJS dashboard
+    })();
+    
     // Set current year in footer
     const currentYearElement = document.getElementById('current-year');
     if (currentYearElement) {
@@ -27,12 +33,55 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Form validation
+    // Form submission with EmailJS
     const contactForm = document.getElementById('contact-form');
+    const formSuccess = document.getElementById('form-success');
+    const sendAnotherButton = document.getElementById('send-another');
+    const formSpinner = document.getElementById('form-spinner');
     
     if (contactForm) {
+        // Function to show validation error
+        function showValidationError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'form-error';
+            errorDiv.textContent = message;
+            
+            // Remove any existing error
+            const existingError = contactForm.querySelector('.form-error');
+            if (existingError) {
+                existingError.remove();
+            }
+            
+            // Add new error before the submit button
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            contactForm.insertBefore(errorDiv, submitButton);
+            
+            // Remove error after 5 seconds
+            setTimeout(() => {
+                errorDiv.classList.add('form-error-fade');
+                setTimeout(() => {
+                    if (errorDiv.parentNode) {
+                        errorDiv.remove();
+                    }
+                }, 300);
+            }, 5000);
+        }
+
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            // Remove any existing error
+            const existingError = contactForm.querySelector('.form-error');
+            if (existingError) {
+                existingError.remove();
+            }
+            
+            // Show loading state
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            submitButton.disabled = true;
+            submitButton.textContent = 'Изпращане...';
+            formSpinner.style.display = 'block';
             
             // Get form fields
             const name = document.getElementById('name').value.trim();
@@ -43,14 +92,20 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Validate fields
             if (!name || !email || !restaurant || !message) {
-                alert('Моля, попълнете всички задължителни полета');
+                showValidationError('Моля, попълнете всички задължителни полета');
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+                formSpinner.style.display = 'none';
                 return;
             }
             
             // Validate email format
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
-                alert('Моля, въведете валиден имейл адрес');
+                showValidationError('Моля, въведете валиден имейл адрес');
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+                formSpinner.style.display = 'none';
                 return;
             }
             
@@ -58,33 +113,61 @@ document.addEventListener('DOMContentLoaded', function() {
             if (phone) {
                 const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
                 if (!phoneRegex.test(phone)) {
-                    alert('Моля, въведете валиден телефонен номер');
+                    showValidationError('Моля, въведете валиден телефонен номер');
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalButtonText;
+                    formSpinner.style.display = 'none';
                     return;
                 }
             }
             
-            // For now, we'll just show a success message
-            // In a real implementation, you'd send this data to a server
-            alert('Благодарим за интереса! Ще се свържем с вас скоро.');
-            contactForm.reset();
-            
-            // Data that would be sent to server in a real implementation
-            const formData = {
-                name,
-                email,
-                restaurant,
-                phone,
-                message,
-                timestamp: new Date().toISOString(),
-                language: 'bg',
-                source: 'ketaring.bg landing page'
+            // Prepare data for EmailJS
+            const templateParams = {
+                restaurant: restaurant,
+                name: name,
+                message: message,
+                email: email,
+                phone: phone || 'Не е предоставен'
             };
             
-            console.log('Form submission data:', formData);
-            
-            // Placeholder for future API call
-            // submitFormToServer(formData);
+            // Send email using EmailJS
+            emailjs.send("service_5zeefxe", "template_glecl94", templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    formSpinner.style.display = 'none';
+                    contactForm.style.display = 'none';
+                    formSuccess.style.display = 'block';
+                    
+                    // Track successful form submission
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'form_submission', {
+                            'event_category': 'Contact',
+                            'event_label': 'Restaurant Partner'
+                        });
+                    }
+                })
+                .catch(function(error) {
+                    console.error('FAILED...', error);
+                    showValidationError('Възникна грешка при изпращането. Моля, опитайте отново по-късно или се свържете с нас на info@ketaring.bg');
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalButtonText;
+                    formSpinner.style.display = 'none';
+                });
         });
+        
+        // Handle "Send Another Message" button click
+        if (sendAnotherButton) {
+            sendAnotherButton.addEventListener('click', function() {
+                formSuccess.style.display = 'none';
+                contactForm.style.display = 'block';
+                contactForm.reset();
+                
+                // Reset submit button state
+                const submitButton = contactForm.querySelector('button[type="submit"]');
+                submitButton.disabled = false;
+                submitButton.textContent = 'Изпрати';
+            });
+        }
     }
     
     // Smooth scrolling for anchor links with improved performance
@@ -198,24 +281,4 @@ document.addEventListener('DOMContentLoaded', function() {
         // Fallback for browsers that don't support native lazy loading
         // You would implement a custom lazy loading solution here
     }
-    
-    // Future function for API submission
-    /* 
-    function submitFormToServer(data) {
-        fetch('your-api-endpoint', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    }
-    */
 }); 
